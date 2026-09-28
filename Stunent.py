@@ -1,21 +1,30 @@
 import math
 
 
-def calculate_arc_length(radius: float, angle_radians: float) -> float:
-    """A function for calculating the length of a circular arc."""
-    return radius * angle_radians
+def count_log_iterations(n):
+    """Calculates how many times the natural logarithm of a number needs to be taken."""
+    if n < 1:
+        return 0
+
+    count = 0
+
+    while n >= 1:
+        n = math.log(n)
+        count += 1
+
+    return count
 
 
 if __name__ == "__main__":
     try:
-        r = float(input("Enter the radius of the circle (r): "))
-        alpha = float(input("Enter the angle in radians (alpha): "))
+        user_input = float(input("Enter the number: "))
 
-        if r < 0 or alpha < 0:
-            print("Error: Radius and angle cannot be negative.")
+
+        if user_input <= 0:
+            print("Error: Number must be greater than 0.")
         else:
-            length = calculate_arc_length(r, alpha)
-            print(f"Arc length of a circle: {length:.4f}")
+            iterations = count_log_iterations(user_input)
+            print(f"Number of logarithm iterations: {iterations}")
 
     except ValueError:
-        print("Error: Please enter numeric values.")
+        print("Error: Please enter a valid number.")

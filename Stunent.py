@@ -1,20 +1,26 @@
-# 1 Завдання date
+# 2 Завдання date
 from datetime import datetime
 
 
-def days_between_dates(date_str1: str, date_str2: str) -> int:
-    # Перетворюємо рядки у формати дат
-    date1 = datetime.strptime(date_str1, "%Y-%m-%d").date()
-    date2 = datetime.strptime(date_str2, "%Y-%m-%d").date()
+def convert_date_format():
+    # Отримуємо дані з консолі
+    user_input = input("Введіть дату у форматі YYYY-MM-DD: ")
 
-    # Знаходимо різницю та повертаємо кількість днів (абсолютне значення)
-    return abs((date2 - date1).days)
+    try:
+        # Перетворюємо рядок у об'єкт datetime (парсинг)
+        date_obj = datetime.strptime(user_input, "%Y-%m-%d")
+
+        # Форматуємо об'єкт datetime у потрібний рядок
+        formatted_date = date_obj.strftime("%d/%m/%Y")
+
+        # Виводимо результат
+        print(f"Результат: {formatted_date}")
+
+    except ValueError:
+        # Обробка помилки, якщо формат неправильний або дата не існує
+        print("Помилка! Будь ласка, перевірте правильність введення дати та формату (YYYY-MM-DD).")
 
 
-# Приклад використання:
-date_start = "2026-01-01"
-date_end = "2026-09-30"
-
-result = days_between_dates(date_start, date_end)
-print(f"Кількість днів між датами: {result}")  # Виведе: 272
-
+# Запуск функції
+if __name__ == "__main__":
+    convert_date_format()

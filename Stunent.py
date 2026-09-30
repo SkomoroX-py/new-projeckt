@@ -1,22 +1,23 @@
-# 4 Завдання date
-import calendar
+# 5 Завдання date
+from datetime import datetime
+import time
 
+def calculate_datetime_duration(start_time, end_time):
+    """
+    Calculates the difference between two datetime objects.
+    Returns a timedelta object.
+    """
+    return end_time - start_time
 
-def check_leap_year():
-    try:
-        # Зчитуємо рік з консолі та перетворюємо у ціле число
-        year = int(input("Введіть рік: "))
+# Приклад використання:
+start = datetime.now()
 
-        # Перевіряємо за допомогою вбудованого модуля calendar
-        if calendar.isleap(year):
-            print(f"Рік {year} є високосним.")
-        else:
-            print(f"Рік {year} не є високосним.")
+# Код, виконання якого ми вимірюємо
+time.sleep(1.5)
 
-    except ValueError:
-        print("Будь ласка, введіть коректне ціле число для року.")
+end = datetime.now()
 
-
-# Виклик функції
-check_leap_year()
+duration = calculate_datetime_duration(start, end)
+print(f"Програма виконувалася: {duration}")
+print(f"Тривалість у секундах: {duration.total_seconds()} сек")
 

@@ -1,14 +1,14 @@
-import math
+from datetime import datetime, timedelta
 
-def find_hypotenuse(a, b):
-    """
-    Calculates the hypotenuse of a right-angled triangle given the two legs.
-    """
-    return math.hypot(a, b)
+def add_days_to_current_date(days_to_add):
+    # Отримуємо поточну дату (без часу)
+    current_date = datetime.now().date()
+    # Додаємо задану кількість днів
+    new_date = current_date + timedelta(days=days_to_add)
+    return new_date
 
 # Приклад використання:
-katet1 = 3
-katet2 = 4
-gipotenuza = find_hypotenuse(katet1, katet2)
+# Додамо 10 днів до сьогоднішньої дати
+result = add_days_to_current_date(10)
+print(f"Нова дата: {result}")
 
-print(f"Гіпотенуза трикутника з катетами {katet1} та {katet2} дорівнює: {gipotenuza}")

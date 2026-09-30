@@ -1,31 +1,20 @@
-import math
+# 1 Завдання date
+from datetime import datetime
 
 
-def to_polar(x, y):
-    """A function for converting Cartesian coordinates to polar coordinates."""
-    # Обчислення радіуса (відстані від початку координат)
-    r = math.sqrt(x ** 2 + y ** 2)
+def days_between_dates(date_str1: str, date_str2: str) -> int:
+    # Перетворюємо рядки у формати дат
+    date1 = datetime.strptime(date_str1, "%Y-%m-%d").date()
+    date2 = datetime.strptime(date_str2, "%Y-%m-%d").date()
 
-    # Обчислення кута в радіанах від -pi до pi
-    theta = math.atan2(y, x)
-
-    return r, theta
+    # Знаходимо різницю та повертаємо кількість днів (абсолютне значення)
+    return abs((date2 - date1).days)
 
 
-# Введення даних з консолі
-try:
-    x_coord = float(input("Введіть координату x: "))
-    y_coord = float(input("Введіть координату y: "))
+# Приклад використання:
+date_start = "2026-01-01"
+date_end = "2026-09-30"
 
-    # Виклик функції
-    radius, angle = to_polar(x_coord, y_coord)
-
-    # Виведення результату
-    print(f"\nПолярні координати:")
-    print(f"Радіус (r): {radius:.4f}")
-    print(f"Кут (theta) в радіанах: {angle:.4f}")
-    print(f"Кут в градусах: {math.degrees(angle):.2f}°")
-
-except ValueError:
-    print("Будь ласка, введіть коректні чисельні значення.")
+result = days_between_dates(date_start, date_end)
+print(f"Кількість днів між датами: {result}")  # Виведе: 272
 

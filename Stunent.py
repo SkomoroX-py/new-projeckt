@@ -1,15 +1,31 @@
-from datetime import datetime
+import math
 
-def seconds_between(time1: datetime, time2: datetime) -> float:
-    # Віднімаємо менший час від більшого (або використовуємо abs, щоб уникнути від'ємних значень)
-    delta = abs(time2 - time1)
-    return delta.total_seconds()
 
-# Приклад використання:
-# Формат: Рік, Місяць, День, Година, Хвилина, Секунда
-t1 = datetime(2026, 9, 30, 12, 0, 0)
-t2 = datetime(2026, 9, 30, 14, 30, 15)
+def to_polar(x, y):
+    """A function for converting Cartesian coordinates to polar coordinates."""
+    # Обчислення радіуса (відстані від початку координат)
+    r = math.sqrt(x ** 2 + y ** 2)
 
-seconds = seconds_between(t1, t2)
-print(f"Пройшло секунд: {seconds}")
+    # Обчислення кута в радіанах від -pi до pi
+    theta = math.atan2(y, x)
+
+    return r, theta
+
+
+# Введення даних з консолі
+try:
+    x_coord = float(input("Введіть координату x: "))
+    y_coord = float(input("Введіть координату y: "))
+
+    # Виклик функції
+    radius, angle = to_polar(x_coord, y_coord)
+
+    # Виведення результату
+    print(f"\nПолярні координати:")
+    print(f"Радіус (r): {radius:.4f}")
+    print(f"Кут (theta) в радіанах: {angle:.4f}")
+    print(f"Кут в градусах: {math.degrees(angle):.2f}°")
+
+except ValueError:
+    print("Будь ласка, введіть коректні чисельні значення.")
 

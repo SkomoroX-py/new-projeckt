@@ -1,26 +1,32 @@
-# 2 Завдання date
-from datetime import datetime
+# 3 Завдання date
+from datetime import datetime, timedelta
 
 
-def convert_date_format():
-    # Отримуємо дані з консолі
-    user_input = input("Введіть дату у форматі YYYY-MM-DD: ")
+def get_next_monday():
+    # Отримуємо дату від користувача через консоль
+    date_str = input("Введіть дату у форматі РРРР-ММ-ДД (наприклад, 2026-09-30): ")
 
     try:
-        # Перетворюємо рядок у об'єкт datetime (парсинг)
-        date_obj = datetime.strptime(user_input, "%Y-%m-%d")
+        # Перетворюємо рядок у об'єкт datetime
+        given_date = datetime.strptime(date_str, "%Y-%m-%d").date()
 
-        # Форматуємо об'єкт datetime у потрібний рядок
-        formatted_date = date_obj.strftime("%d/%m/%Y")
+        # weekday() повертає: 0 для понеділка, 1 для вівторка, ..., 6 для неділі
+        current_weekday = given_date.weekday()
 
-        # Виводимо результат
-        print(f"Результат: {formatted_date}")
+        # Обчислюємо, скільки днів залишилося до наступного понеділка
+        # Якщо сьогодні понеділок, додасться 7 днів (наступний тиждень)
+        days_ahead = 7 - current_weekday
+
+        next_monday = given_date + timedelta(days=days_ahead)
+
+        print(f"Задана дата: {given_date} ({given_date.strftime('%A')})")
+        print(f"Дата наступного понеділка: {next_monday}")
+        return next_monday
 
     except ValueError:
-        # Обробка помилки, якщо формат неправильний або дата не існує
-        print("Помилка! Будь ласка, перевірте правильність введення дати та формату (YYYY-MM-DD).")
+        print("Помилка! Будь ласка, введіть дату у правильному форматі РРРР-ММ-ДД.")
 
 
 # Запуск функції
-if __name__ == "__main__":
-    convert_date_format()
+get_next_monday()
+

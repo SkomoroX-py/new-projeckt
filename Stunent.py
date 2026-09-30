@@ -1,32 +1,22 @@
-# 3 Завдання date
-from datetime import datetime, timedelta
+# 4 Завдання date
+import calendar
 
 
-def get_next_monday():
-    # Отримуємо дату від користувача через консоль
-    date_str = input("Введіть дату у форматі РРРР-ММ-ДД (наприклад, 2026-09-30): ")
-
+def check_leap_year():
     try:
-        # Перетворюємо рядок у об'єкт datetime
-        given_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+        # Зчитуємо рік з консолі та перетворюємо у ціле число
+        year = int(input("Введіть рік: "))
 
-        # weekday() повертає: 0 для понеділка, 1 для вівторка, ..., 6 для неділі
-        current_weekday = given_date.weekday()
-
-        # Обчислюємо, скільки днів залишилося до наступного понеділка
-        # Якщо сьогодні понеділок, додасться 7 днів (наступний тиждень)
-        days_ahead = 7 - current_weekday
-
-        next_monday = given_date + timedelta(days=days_ahead)
-
-        print(f"Задана дата: {given_date} ({given_date.strftime('%A')})")
-        print(f"Дата наступного понеділка: {next_monday}")
-        return next_monday
+        # Перевіряємо за допомогою вбудованого модуля calendar
+        if calendar.isleap(year):
+            print(f"Рік {year} є високосним.")
+        else:
+            print(f"Рік {year} не є високосним.")
 
     except ValueError:
-        print("Помилка! Будь ласка, введіть дату у правильному форматі РРРР-ММ-ДД.")
+        print("Будь ласка, введіть коректне ціле число для року.")
 
 
-# Запуск функції
-get_next_monday()
+# Виклик функції
+check_leap_year()
 

@@ -1,14 +1,17 @@
-from datetime import datetime, timedelta
+import math
 
-def add_days_to_current_date(days_to_add):
-    # Отримуємо поточну дату (без часу)
-    current_date = datetime.now().date()
-    # Додаємо задану кількість днів
-    new_date = current_date + timedelta(days=days_to_add)
-    return new_date
+def find_lcm(a, b):
+    # Якщо обидва числа нулі, НСК дорівнює 0
+    if a == 0 and b == 0:
+        return 0
+    # Формула НСК через НСД (math.gcd)
+    return abs(a * b) // math.gcd(a, b)
 
 # Приклад використання:
-# Додамо 10 днів до сьогоднішньої дати
-result = add_days_to_current_date(10)
-print(f"Нова дата: {result}")
+num1 = 12
+num2 = 18
+result = find_lcm(num1, num2)
+
+print(f"НСК чисел {num1} та {num2} дорівнює: {result}")
+# Виведе: НСК чисел 12 та 18 дорівнює: 36
 

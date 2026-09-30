@@ -1,17 +1,15 @@
-import math
+from datetime import datetime
 
-def find_lcm(a, b):
-    # Якщо обидва числа нулі, НСК дорівнює 0
-    if a == 0 and b == 0:
-        return 0
-    # Формула НСК через НСД (math.gcd)
-    return abs(a * b) // math.gcd(a, b)
+def seconds_between(time1: datetime, time2: datetime) -> float:
+    # Віднімаємо менший час від більшого (або використовуємо abs, щоб уникнути від'ємних значень)
+    delta = abs(time2 - time1)
+    return delta.total_seconds()
 
 # Приклад використання:
-num1 = 12
-num2 = 18
-result = find_lcm(num1, num2)
+# Формат: Рік, Місяць, День, Година, Хвилина, Секунда
+t1 = datetime(2026, 9, 30, 12, 0, 0)
+t2 = datetime(2026, 9, 30, 14, 30, 15)
 
-print(f"НСК чисел {num1} та {num2} дорівнює: {result}")
-# Виведе: НСК чисел 12 та 18 дорівнює: 36
+seconds = seconds_between(t1, t2)
+print(f"Пройшло секунд: {seconds}")
 

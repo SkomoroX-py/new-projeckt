@@ -1,23 +1,22 @@
-# 5 Завдання date
-from datetime import datetime
-import time
+import math
 
-def calculate_datetime_duration(start_time, end_time):
+
+def calculate_ellipse_area(a, b):
     """
-    Calculates the difference between two datetime objects.
-    Returns a timedelta object.
+    Calculates the area of an ellipse along the major and minor axes.
+    :param a: Major semi-axis (float or int)
+    :param b: Minor semi-axis (float or int)
+    :return: Ellipse area (float)
     """
-    return end_time - start_time
+    if a <= 0 or b <= 0:
+        raise ValueError("The lengths of the semi-axes must be greater than zero.")
 
-# Приклад використання:
-start = datetime.now()
+    return math.pi * a * b
 
-# Код, виконання якого ми вимірюємо
-time.sleep(1.5)
 
-end = datetime.now()
+semi_major_axis = 5
+semi_minor_axis = 3
 
-duration = calculate_datetime_duration(start, end)
-print(f"Програма виконувалася: {duration}")
-print(f"Тривалість у секундах: {duration.total_seconds()} сек")
+area = calculate_ellipse_area(semi_major_axis, semi_minor_axis)
+print(f"Area of an ellipse with semi-axes {semi_major_axis} and {semi_minor_axis} equals: {area:.4f}")
 

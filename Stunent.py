@@ -1,38 +1,43 @@
-class Fraction:
-    # Static variable (class-level attribute) to store the count of objects
-    _instance_count = 0
-
-    def __init__(self, numerator: int, denominator: int):
-        """
-        Constructor to initialize the fraction object.
-        """
-        if denominator == 0:
-            raise ValueError("Denominator cannot be zero.")
-
-        self.numerator = numerator
-        self.denominator = denominator
-
-        # Increment the counter every time a new object is created
-        Fraction._instance_count += 1
+class TemperatureConverter:
+    # Static variable to keep track of the total number of conversions
+    _conversion_count = 0
 
     @classmethod
-    def get_instance_count(cls) -> int:
-        """
-        Static/Class method that returns the total number of created objects.
-        """
-        return cls._instance_count
+    def _increment_count(cls):
+        """Internal class method to increment the conversion counter."""
+        cls._conversion_count += 1
+
+    @staticmethod
+    def celsius_to_fahrenheit(celsius: float) -> float:
+        """Converts temperature from Celsius to Fahrenheit."""
+        TemperatureConverter._increment_count()
+        return (celsius * 9/5) + 32
+
+    @staticmethod
+    def fahrenheit_to_celsius(fahrenheit: float) -> float:
+        """Converts temperature from Fahrenheit to Celsius."""
+        TemperatureConverter._increment_count()
+        return (fahrenheit - 32) * 5/9
+
+    @classmethod
+    def get_conversion_count(cls) -> int:
+        """Returns the total number of temperature conversions performed."""
+        return cls._conversion_count
 
 
 # --- Example of usage ---
 if __name__ == "__main__":
-    # Check initial count (should be 0)
-    print(f"Initial count: {Fraction.get_instance_count()}")
+    # Perform several conversions
+    temp1 = TemperatureConverter.celsius_to_fahrenheit(25)
+    print(f"25°C is equal to {temp1}°F")
 
-    # Create instances of the Fraction class
-    f1 = Fraction(1, 2)
-    f2 = Fraction(3, 4)
-    f3 = Fraction(5, 6)
-    #
-    # Check count after creating 3 objects (should be 3)
-    print(f"Count after creating objects: {Fraction.get_instance_count()}")
+    temp2 = TemperatureConverter.fahrenheit_to_celsius(98.6)
+    print(f"98.6°F is equal to {temp2}°C")
+
+    temp3 = TemperatureConverter.celsius_to_fahrenheit(0)
+    print(f"0°C is equal to {temp3}°F")
+
+    # Get the total count of conversions
+    total_conversions = TemperatureConverter.get_conversion_count()
+    print(f"Total conversions performed: {total_conversions}")
 

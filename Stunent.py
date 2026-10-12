@@ -1,72 +1,71 @@
-class Book:
-    def __init__(self, title: str = "", year: int = 0, publisher: str = "", genre: str = "", author: str = "",
-                 price: float = 0.0):
-        # Initialize the Book object with default values
-        self.title = title
-        self.year = year
-        self.publisher = publisher
-        self.genre = genre
-        self.author = author
-        self.price = price
+from datetime import datetime
+
+
+class Stadium:
+    def __init__(self, name: str = "", opening_date: str = "01.01.2000", country: str = "", city: str = "",
+                 capacity: int = 0):
+        # Initialize the attributes of the stadium
+        self.name = name
+        self.opening_date = opening_date
+        self.country = country
+        self.city = city
+        self.capacity = capacity
 
     def input_data(self):
-        # Get book details from user input
-        print("\n--- Enter Book Details ---")
-        self.title = input("Enter title: ")
+        # Method to input stadium details from the console
+        print("\n--- Enter Stadium Data ---")
+        self.name = input("Enter stadium name: ")
+        self.opening_date = input("Enter opening date (e.g., DD.MM.YYYY): ")
+        self.country = input("Enter country: ")
+        self.city = input("Enter city: ")
 
         while True:
             try:
-                self.year = int(input("Enter publication year: "))
-                break
+                self.capacity = int(input("Enter capacity (number of seats): "))
+                if self.capacity >= 0:
+                    break
+                print("Capacity cannot be negative. Try again.")
             except ValueError:
-                print("Invalid input. Please enter a valid year (integer).")
-
-        self.publisher = input("Enter publisher: ")
-        self.genre = input("Enter genre: ")
-        self.author = input("Enter author: ")
-
-        while True:
-            try:
-                self.price = float(input("Enter price: "))
-                break
-            except ValueError:
-                print("Invalid input. Please enter a valid price (number).")
+                print("Invalid input. Please enter a valid integer for capacity.")
 
     def display_data(self):
-        # Print the book details to the console
-        print("\n--- Book Information ---")
-        print(f"Title:         {self.title}")
-        print(f"Author:        {self.author}")
-        print(f"Genre:         {self.genre}")
-        print(f"Publisher:     {self.publisher}")
-        print(f"Year:          {self.year}")
-        print(f"Price:         {self.price:.2f} UAH")
+        # Method to display stadium details to the console
+        print("\n--- Stadium Information ---")
+        print(f"Stadium Name: {self.name}")
+        print(f"Opening Date: {self.opening_date}")
+        print(f"Location:     {self.city}, {self.country}")
+        print(f"Capacity:     {self.capacity:,} seats")
 
-    def apply_discount(self, percentage: float):
-        # Reduce the price of the book by a given percentage
-        if 0 < percentage <= 100:
-            self.price -= self.price * (percentage / 100)
-            print(f"\nSuccess: Applied a {percentage}% discount. New price: {self.price:.2f} UAH")
+    # Getters and Setters for operational flexibility
+    def get_name(self) -> str:
+        return self.name
+
+    def set_name(self, name: str):
+        self.name = name
+
+    def get_capacity(self) -> int:
+        return self.capacity
+
+    def set_capacity(self, capacity: int):
+        if capacity >= 0:
+            self.capacity = capacity
         else:
-            print("\nError: Invalid discount percentage. Must be between 0 and 100.")
-
-    def get_book_age(self, current_year: int = 2026) -> int:
-        # Calculate and return how many years have passed since publication
-        return current_year - self.year
+            print("Error: Capacity cannot be negative.")
 
 
-# --- Example of usage ---
+# Example usage of the Stadium class
 if __name__ == "__main__":
-    # Option 1: Create a book object and fill it using user input
-    my_book = Book()
-    my_book.input_data()
-    my_book.display_data()
+    # Creating an instance with default/initial values
+    stadium1 = Stadium("Olimpiyskiy", "12.08.1923", "Ukraine", "Kyiv", 70050)
+    stadium1.display_data()
 
-    # Option 2: Apply a discount
-    my_book.apply_discount(15)  # 15% off
-    my_book.display_data()
+    # Creating an empty instance and filling it via user input
+    stadium2 = Stadium()
+    stadium2.input_data()
+    stadium2.display_data()
 
-    # Option 3: Calculate the age of the book
-    age = my_book.get_book_age()
-    print(f"\nThe book was published {age} years ago.")
+    # Updating capacity using the setter method
+    print("\nUpdating the capacity of the second stadium...")
+    stadium2.set_capacity(45000)
+    print(f"New capacity of {stadium2.get_name()}: {stadium2.get_capacity():,} seats")
 

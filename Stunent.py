@@ -32,7 +32,7 @@ if __name__ == "__main__":
     f1 = Fraction(1, 2)
     f2 = Fraction(3, 4)
     f3 = Fraction(5, 6)
-
+    #
     # Check count after creating 3 objects (should be 3)
     print(f"Count after creating objects: {Fraction.get_instance_count()}")
 

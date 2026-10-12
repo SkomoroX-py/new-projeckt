@@ -1,74 +1,66 @@
-class City:
-    def __init__(self, name=None, region=None, country=None, population=0, postal_code=None, phone_code=None):
-        self.name = name
-        self.region = region
-        self.country = country
-        self.population = population
-        self.postal_code = postal_code
-        self.phone_code = phone_code
+class Car:
+    def __init__(self, model_name: str, year: int, manufacturer: str, engine_capacity: float, color: str, price: float):
+        """Initialize the Car object with its attributes."""
+        self.model_name = model_name
+        self.year = year
+        self.manufacturer = manufacturer
+        self.engine_capacity = engine_capacity
+        self.color = color
+        self.price = price
 
     def input_data(self):
-        """Entering city data from the keyboard"""
-        print("--- Введення даних про місто ---")
-        self.name = input("Введіть назву міста: ")
-        self.region = input("Введіть назву регіону/області: ")
-        self.country = input("Введіть назву країни: ")
-        while True:
-            try:
-                self.population = int(input("Введіть кількість жителів: "))
-                break
-            except ValueError:
-                print("Помилка! Кількість жителів має бути цілим числом.")
-        self.postal_code = input("Введіть поштовий індекс: ")
-        self.phone_code = input("Введіть телефонний код: ")
+        """Allow user to manually input or update the car details."""
+        print("\n--- Enter Car Details ---")
+        self.model_name = input("Enter model name: ")
+        self.year = int(input("Enter production year: "))
+        self.manufacturer = input("Enter manufacturer: ")
+        self.engine_capacity = float(input("Enter engine capacity (in liters): "))
+        self.color = input("Enter car color: ")
+        self.price = float(input("Enter car price ($): "))
 
     def display_data(self):
-        """Displaying city data on the screen"""
-        print(f"\n--- Інформація про місто: {self.name} ---")
-        print(f"Регіон:           {self.region}")
-        print(f"Країна:           {self.country}")
-        print(f"Кількість населення: {self.population:,} чол.")
-        print(f"Поштовий індекс:  {self.postal_code}")
-        print(f"Телефонний код:   {self.phone_code}")
+        """Display the car details in a readable format."""
+        print("\n--- Car Specification ---")
+        print(f"Manufacturer:    {self.manufacturer}")
+        print(f"Model Name:      {self.model_name}")
+        print(f"Production Year: {self.year}")
+        print(f"Engine Capacity: {self.engine_capacity}L")
+        print(f"Color:           {self.color}")
+        print(f"Price:           ${self.price:,.2f}")
 
-    # Getters and setters for individual field access (other operations)
-    def update_population(self, new_population):
-        """Population count update"""
-        if new_population >= 0:
-            self.population = new_population
+    def apply_discount(self, percentage: float):
+        """Reduce the price of the car by a given percentage."""
+        if 0 < percentage < 100:
+            discount_amount = self.price * (percentage / 100)
+            self.price -= discount_amount
+            print(f"\n[Success] Applied a {percentage}% discount. New price: ${self.price:,.2f}")
         else:
-            print("Кількість населення не може бути від'ємною!")
+            print("\n[Error] Invalid discount percentage. Must be between 0 and 100.")
 
-    def get_city_location(self):
-        """A method that returns the full name of the location."""
-        return f"{self.name}, {self.region}, {self.country}"
-
-
-# --- Demonstration of the program's operation using Prague as an example. ---
-
-# Creating an object via the constructor with initial data for Prague.
-prague = City(
-    name="Прага",
-    region="Головне місто Прага",
-    country="Чехія",
-    population=1384732,
-    postal_code="100 00 - 199 00",
-    phone_code="+420"
-)
-
-# Data output
-prague.display_data()
-
-# Demonstration of additional methods
-print(f"\nПовна локація: {prague.get_city_location()}")
-
-# Population count update
-prague.update_population(1400000)
-print(f"Оновлене населення: {prague.population:,} чол.")
+    def change_color(self, new_color: str):
+        """Repaint the car to a new color."""
+        print(f"\n[Repaint] Changing color from {self.color} to {new_color}.")
+        self.color = new_color
 
 
-'''Creating new city data via keyboard input.'''
-custom_city = City()
-custom_city.input_data()
-custom_city.display_data()
+# --- Example Usage ---
+if __name__ == "__main__":
+    # Creating an initial car object
+    my_car = Car("Model S", 2023, "Tesla", 0.0, "White", 75000.0)
+
+    # Displaying initial data
+    my_car.display_data()
+
+    # Changing the car color
+    my_car.change_color("Midnight Blue")
+
+    # Applying a 10% discount
+    my_car.apply_discount(10)
+
+    # Displaying updated data
+    my_car.display_data()
+
+    # Let the user input new values manually
+    my_car.input_data()
+    my_car.display_data()
 

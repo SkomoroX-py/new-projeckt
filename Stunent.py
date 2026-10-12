@@ -1,43 +1,79 @@
-class TemperatureConverter:
-    # Static variable to keep track of the total number of conversions
-    _conversion_count = 0
+class UnitConverter:
+    """
+    A utility class to convert measurements between Metric and Imperial systems
+    using static methods. Includes length, weight, and volume conversions.
+    """
 
-    @classmethod
-    def _increment_count(cls):
-        """Internal class method to increment the conversion counter."""
-        cls._conversion_count += 1
-
-    @staticmethod
-    def celsius_to_fahrenheit(celsius: float) -> float:
-        """Converts temperature from Celsius to Fahrenheit."""
-        TemperatureConverter._increment_count()
-        return (celsius * 9/5) + 32
+    # --- Length Conversions ---
 
     @staticmethod
-    def fahrenheit_to_celsius(fahrenheit: float) -> float:
-        """Converts temperature from Fahrenheit to Celsius."""
-        TemperatureConverter._increment_count()
-        return (fahrenheit - 32) * 5/9
+    def meters_to_feet(meters: float) -> float:
+        """Convert meters to feet."""
+        return meters * 3.28084
 
-    @classmethod
-    def get_conversion_count(cls) -> int:
-        """Returns the total number of temperature conversions performed."""
-        return cls._conversion_count
+    @staticmethod
+    def feet_to_meters(feet: float) -> float:
+        """Convert feet to meters."""
+        return feet / 3.28084
+
+    @staticmethod
+    def centimeters_to_inches(cm: float) -> float:
+        """Convert centimeters to inches."""
+        return cm * 0.393701
+
+    @staticmethod
+    def inches_to_centimeters(inches: float) -> float:
+        """Convert inches to centimeters."""
+        return inches / 0.393701
+
+    @staticmethod
+    def kilometers_to_miles(km: float) -> float:
+        """Convert kilometers to miles."""
+        return km * 0.621371
+
+    @staticmethod
+    def miles_to_kilometers(miles: float) -> float:
+        """Convert miles to kilometers."""
+        return miles / 0.621371
+
+    # --- Weight Conversions ---
+
+    @staticmethod
+    def kilograms_to_pounds(kg: float) -> float:
+        """Convert kilograms to pounds."""
+        return kg * 2.20462
+
+    @staticmethod
+    def pounds_to_kilograms(lbs: float) -> float:
+        """Convert pounds to kilograms."""
+        return lbs / 2.20462
+
+    # --- Volume Conversions ---
+
+    @staticmethod
+    def liters_to_gallons(liters: float) -> float:
+        """Convert liters to US gallons."""
+        return liters * 0.264172
+
+    @staticmethod
+    def gallons_to_liters(gallons: float) -> float:
+        """Convert US gallons to liters."""
+        return gallons / 0.264172
 
 
-# --- Example of usage ---
+# --- Example Usage ---
 if __name__ == "__main__":
-    # Perform several conversions
-    temp1 = TemperatureConverter.celsius_to_fahrenheit(25)
-    print(f"25°C is equal to {temp1}°F")
+    # Testing length conversions
+    meters = 10
+    feet = UnitConverter.meters_to_feet(meters)
+    print(f"{meters} meters = {feet:.2f} feet")
 
-    temp2 = TemperatureConverter.fahrenheit_to_celsius(98.6)
-    print(f"98.6°F is equal to {temp2}°C")
+    inches = 12
+    cm = UnitConverter.inches_to_centimeters(inches)
+    print(f"{inches} inches = {cm:.2f} cm")
 
-    temp3 = TemperatureConverter.celsius_to_fahrenheit(0)
-    print(f"0°C is equal to {temp3}°F")
-
-    # Get the total count of conversions
-    total_conversions = TemperatureConverter.get_conversion_count()
-    print(f"Total conversions performed: {total_conversions}")
+    # Testing weight conversions
+    kg = 75
+    lbs = UnitConverter.kilograms_to_pounds(kg)
+    print(f"{kg} kg = {lbs:.2f} lbs")
 

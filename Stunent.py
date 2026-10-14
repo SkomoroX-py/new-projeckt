@@ -1,79 +1,45 @@
-class UnitConverter:
-    """
-    A utility class to convert measurements between Metric and Imperial systems
-    using static methods. Includes length, weight, and volume conversions.
-    """
+class FullTimeEmployee:
+    """Staff employee with a fixed monthly salary."""
+    def __init__(self, name, monthly_salary):
+        self.name = name
+        self.monthly_salary = monthly_salary
 
-    # --- Length Conversions ---
-
-    @staticmethod
-    def meters_to_feet(meters: float) -> float:
-        """Convert meters to feet."""
-        return meters * 3.28084
-
-    @staticmethod
-    def feet_to_meters(feet: float) -> float:
-        """Convert feet to meters."""
-        return feet / 3.28084
-
-    @staticmethod
-    def centimeters_to_inches(cm: float) -> float:
-        """Convert centimeters to inches."""
-        return cm * 0.393701
-
-    @staticmethod
-    def inches_to_centimeters(inches: float) -> float:
-        """Convert inches to centimeters."""
-        return inches / 0.393701
-
-    @staticmethod
-    def kilometers_to_miles(km: float) -> float:
-        """Convert kilometers to miles."""
-        return km * 0.621371
-
-    @staticmethod
-    def miles_to_kilometers(miles: float) -> float:
-        """Convert miles to kilometers."""
-        return miles / 0.621371
-
-    # --- Weight Conversions ---
-
-    @staticmethod
-    def kilograms_to_pounds(kg: float) -> float:
-        """Convert kilograms to pounds."""
-        return kg * 2.20462
-
-    @staticmethod
-    def pounds_to_kilograms(lbs: float) -> float:
-        """Convert pounds to kilograms."""
-        return lbs / 2.20462
-
-    # --- Volume Conversions ---
-
-    @staticmethod
-    def liters_to_gallons(liters: float) -> float:
-        """Convert liters to US gallons."""
-        return liters * 0.264172
-
-    @staticmethod
-    def gallons_to_liters(gallons: float) -> float:
-        """Convert US gallons to liters."""
-        return gallons / 0.264172
+    def calculate_salary(self):
+        return self.monthly_salary
 
 
-# --- Example Usage ---
-if __name__ == "__main__":
-    # Testing length conversions
-    meters = 10
-    feet = UnitConverter.meters_to_feet(meters)
-    print(f"{meters} meters = {feet:.2f} feet")
+class HourlyEmployee:
+    """Hourly employee (paid for hours worked)."""
+    def __init__(self, name, hourly_rate, hours_worked):
+        self.name = name
+        self.hourly_rate = hourly_rate
+        self.hours_worked = hours_worked
 
-    inches = 12
-    cm = UnitConverter.inches_to_centimeters(inches)
-    print(f"{inches} inches = {cm:.2f} cm")
+    def calculate_salary(self):
+        return self.hourly_rate * self.hours_worked
 
-    # Testing weight conversions
-    kg = 75
-    lbs = UnitConverter.kilograms_to_pounds(kg)
-    print(f"{kg} kg = {lbs:.2f} lbs")
 
+class Contractor:
+    """Contractor (payment for the completed project or a fixed fee)."""
+    def __init__(self, name, project_fee):
+        self.name = name
+        self.project_fee = project_fee
+
+    def calculate_salary(self):
+        return self.project_fee
+
+
+# 1. Creating a list of different types of employees
+employees = [
+    FullTimeEmployee(name="Олександр (Штат)", monthly_salary=30000),
+    HourlyEmployee(name="Марія (Погодинно)", hourly_rate=250, hours_worked=120),
+    Contractor(name="Дмитро (Фріланс)", project_fee=15000),
+    FullTimeEmployee(name="Олена (Штат)", monthly_salary=45000)
+]
+
+# 2. We output each person's calculated salary in a single loop.
+print("Розрахунок заробітної плати працівників:")
+print("-" * 45)
+for employee in employees:
+    salary = employee.calculate_salary()
+    print(f"Працівник: {employee.name:<20} | Зарплата: {salary:>7} грн.")

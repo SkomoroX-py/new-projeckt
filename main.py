@@ -41,8 +41,8 @@ if not check_queue(cafe_queue):
     for order in cafe_queue:
         print(f"  • Замовлення №{order[0]}: {order[1]}")
 
+print('\n')
 '''5. Display a message if the queue is empty'''
-print("\n--- Очищення черги для демонстрації порожнього стану ---")
 while cafe_queue:
     cafe_queue.popleft()
 
